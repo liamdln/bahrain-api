@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using bahrain_api.DTOs;
 using Microsoft.AspNetCore.JsonPatch;
+using System.Linq;
 
 namespace bahrain_api.Controllers
 {
@@ -55,10 +56,12 @@ namespace bahrain_api.Controllers
         }
 
         [HttpGet("cid/{cid}")]
-        public ActionResult<ATControllerReadDTO> GetControllerByNetworkId(string networkId)
+        public ActionResult<ATControllerReadDTO> GetControllerByNetworkId(string cid)
         {
+            
+            //Console.WriteLine($"cid: {cid}");
 
-            var controllerItem = _repository.GetControllerByNetworkId(networkId);
+            var controllerItem = _repository.GetControllerByNetworkId(cid);
             if (controllerItem != null) {
                 return Ok(_mapper.Map<ATControllerReadDTO>(controllerItem));
             } else {

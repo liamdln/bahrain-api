@@ -29,13 +29,14 @@ namespace bahrain_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ATControllerContext>(opt => opt.UseMySQL(Configuration.GetConnectionString("BahrainConnection")));
+            services.AddDbContext<BahrainDataContext>(opt => opt.UseMySQL(Configuration.GetConnectionString("BahrainConnection")));
             services.AddControllers().AddNewtonsoftJson(s => {
                 s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IATControllerRepo, SqlATControllerRepo>();
+            services.AddScoped<IStaffRepo, SqlStaffRepo>();
             //services.AddScoped<IATControllerRepo, MockATControllerRepo>();
         }
 

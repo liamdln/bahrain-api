@@ -5,14 +5,15 @@ using bahrain_api.DTOs;
 namespace bahrain_api.Profiles
 {
 
-    public class ATControllersProfile : Profile
+    public class BahrainDataProfiles : Profile
     {
 
-        public ATControllersProfile()
+        public BahrainDataProfiles()
         {
             
             // Source -> target
 
+            // ATControllers
             //GETTING
             CreateMap<ATController, ATControllerReadDTO>();
 
@@ -24,6 +25,11 @@ namespace bahrain_api.Profiles
 
             //PATCHING
             CreateMap<ATController, ATControllerUpdateDTO>();
+            
+            // Staff
+            // GETTING
+            CreateMap<StaffMember, StaffReadDto>();
+            CreateMap<StaffMember, StaffReadAdminDto>();
 
         }
 

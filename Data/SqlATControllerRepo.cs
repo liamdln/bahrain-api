@@ -8,9 +8,9 @@ namespace bahrain_api.Data
 
     public class SqlATControllerRepo : IATControllerRepo
     {
-        private readonly ATControllerContext _context;
+        private readonly BahrainDataContext _context;
 
-        public SqlATControllerRepo(ATControllerContext context)
+        public SqlATControllerRepo(BahrainDataContext context)
         {
             _context = context;
         }
@@ -55,14 +55,14 @@ namespace bahrain_api.Data
             return _context.ATControllers.Where(atc => atc.Rating == rating).ToList();
         }
 
-        public ATController GetControllerStatus(int networkId)
+        public string GetControllerStatus(string cid)
         {
-            throw new NotImplementedException();
+            return GetControllerByNetworkId(cid).Visitor ? "Visitor" : "Home Controller";
         }
 
-        public ATController GetHomeDivision(int networkId)
+        public string GetHomeDivision(string cid)
         {
-            throw new NotImplementedException();
+            return GetControllerByNetworkId(cid).HomeVacc;
         }
 
         //TODO: Fix this: Problem: can't use commas in the browser, maybe find something different to put inbetween.

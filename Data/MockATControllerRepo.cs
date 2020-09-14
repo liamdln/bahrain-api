@@ -4,7 +4,7 @@ using bahrain_api.Models;
 namespace bahrain_api.Data
 {
 
-    public class MockATControllerRepo : IATControllerRepo
+    public class MockATControllerRepo //: IATControllerRepo
     {
         public void AddATController(ATController atc)
         {

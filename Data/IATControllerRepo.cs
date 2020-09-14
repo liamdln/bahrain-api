@@ -15,9 +15,9 @@ namespace bahrain_api.Data
         IEnumerable<ATController> GetControllerByRating(string rating);
         IEnumerable<ATController> GetSignedOffControllers();
         IEnumerable<ATController> GetSoloValidatedControllers();
-        ATController GetControllerByNetworkId(string networkID);
-        ATController GetControllerStatus(int networkId);
-        ATController GetHomeDivision(int networkId);
+        ATController GetControllerByNetworkId(string cid);
+        string GetControllerStatus(string cid);
+        string GetHomeDivision(string cid);
         //ATController GetControllersByPosition(string positions);
         void AddATController(ATController atc);
         void UpdateATController(ATController atc);
