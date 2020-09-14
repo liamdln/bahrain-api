@@ -8,11 +8,11 @@ namespace bahrain_api.Data
 
     public class SqlATControllerRepo : IATControllerRepo
     {
-        private readonly ATControllerContext context;
+        private readonly ATControllerContext _context;
 
         public SqlATControllerRepo(ATControllerContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public void AddATController(ATController atc)
@@ -22,7 +22,7 @@ namespace bahrain_api.Data
                 throw new ArgumentNullException(nameof(atc));
             }
 
-            this.context.ATControllers.Add(atc);
+            _context.ATControllers.Add(atc);
 
         }
 
@@ -32,35 +32,35 @@ namespace bahrain_api.Data
             {
                 throw new ArgumentNullException(nameof(atc));
             }
-            this.context.ATControllers.Remove(atc);
+            _context.ATControllers.Remove(atc);
         }
 
         public IEnumerable<ATController> GetAllControllers()
         {
-            return this.context.ATControllers.ToList();
+            return _context.ATControllers.ToList();
         }
 
-        public ATController GetControllerByID(int ID)
+        public ATController GetControllerById(int id)
         {
-            return this.context.ATControllers.FirstOrDefault(atc => atc.id == ID);
+            return _context.ATControllers.FirstOrDefault(atc => atc.Id == id);
         }
 
-        public ATController GetControllerByNetworkID(string networkID)
+        public ATController GetControllerByNetworkId(string networkId)
         {
-            return this.context.ATControllers.FirstOrDefault(atc => atc.networkID == networkID);
+            return _context.ATControllers.FirstOrDefault(atc => atc.NetworkId == networkId);
         }
 
         public IEnumerable<ATController> GetControllerByRating(string rating)
         {
-            return this.context.ATControllers.Where(atc => atc.rating == rating).ToList();
+            return _context.ATControllers.Where(atc => atc.Rating == rating).ToList();
         }
 
-        public ATController GetControllerStatus(int networkID)
+        public ATController GetControllerStatus(int networkId)
         {
             throw new NotImplementedException();
         }
 
-        public ATController GetHomeDivision(int networkID)
+        public ATController GetHomeDivision(int networkId)
         {
             throw new NotImplementedException();
         }
@@ -68,22 +68,22 @@ namespace bahrain_api.Data
         //TODO: Fix this: Problem: can't use commas in the browser, maybe find something different to put inbetween.
         // public IEnumerable<ATController> GetControllersByPosition(string positions)
         // {
-        //     return this.context.ATControllers(atc => atc.approvedPositions == positions);
+        //     return _context.ATControllers(atc => atc.approvedPositions == positions);
         // }
 
         public IEnumerable<ATController> GetSignedOffControllers()
         {
-            return this.context.ATControllers.Where(atc => atc.hasSignOff == true).ToList();
+            return _context.ATControllers.Where(atc => atc.HasSignOff).ToList();
         }
 
         public IEnumerable<ATController> GetSoloValidatedControllers()
         {
-            return this.context.ATControllers.Where(atc => atc.onSolo == true).ToList();
+            return _context.ATControllers.Where(atc => atc.OnSolo).ToList();
         }
 
         public bool SaveChanges()
         {
-            return (this.context.SaveChanges() >= 0);
+            return (_context.SaveChanges() >= 0);
         }
 
         // PUT

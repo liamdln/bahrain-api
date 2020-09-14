@@ -12,15 +12,15 @@ namespace bahrain_api.Controllers
     [ApiController]
     public class ATControllersController : ControllerBase
     {
-        private readonly IATControllerRepo repository;
-        private readonly IMapper mapper;
+        private readonly IATControllerRepo _repository;
+        private readonly IMapper _mapper;
 
         //private readonly MockATControllerRepo _repository = new MockATControllerRepo();
 
         public ATControllersController(IATControllerRepo repository, IMapper mapper)
         {
-            this.repository = repository;
-            this.mapper = mapper;
+            _repository = repository;
+            _mapper = mapper;
         }
 
         /////////////
@@ -34,20 +34,20 @@ namespace bahrain_api.Controllers
         [HttpGet]
         public ActionResult <IEnumerable<ATControllerReadDTO>> GetAllControllers()
         {
-            var controllerItems = this.repository.GetAllControllers();
+            var controllerItems = _repository.GetAllControllers();
 
-            return Ok(this.mapper.Map<IEnumerable<ATControllerReadDTO>>(controllerItems));
+            return Ok(_mapper.Map<IEnumerable<ATControllerReadDTO>>(controllerItems));
         }
 
         //GET api.bahrainvacc.com/controllers/{id}
         [HttpGet("id/{id}", Name="GetControllerByID")]
-        public ActionResult<ATControllerReadDTO> GetControllerByID(int id)
+        public ActionResult<ATControllerReadDTO> GetControllerById(int id)
         {
 
-            var controllerItem = this.repository.GetControllerByID(id);
+            var controllerItem = _repository.GetControllerById(id);
 
             if (controllerItem != null) {
-                return Ok(this.mapper.Map<ATControllerReadDTO>(controllerItem));
+                return Ok(_mapper.Map<ATControllerReadDTO>(controllerItem));
             } else {
                 return NotFound();
             }
@@ -55,12 +55,12 @@ namespace bahrain_api.Controllers
         }
 
         [HttpGet("cid/{cid}")]
-        public ActionResult<ATControllerReadDTO> GetControllerByNetworkID(string networkID)
+        public ActionResult<ATControllerReadDTO> GetControllerByNetworkId(string networkId)
         {
 
-            var controllerItem = this.repository.GetControllerByNetworkID(networkID);
+            var controllerItem = _repository.GetControllerByNetworkId(networkId);
             if (controllerItem != null) {
-                return Ok(this.mapper.Map<ATControllerReadDTO>(controllerItem));
+                return Ok(_mapper.Map<ATControllerReadDTO>(controllerItem));
             } else {
                 return NotFound();
             }
@@ -71,9 +71,9 @@ namespace bahrain_api.Controllers
         public ActionResult<IEnumerable<ATControllerReadDTO>> GetControllerByRating(string rating)
         {
 
-            var controllerItems = this.repository.GetControllerByRating(rating);
+            var controllerItems = _repository.GetControllerByRating(rating);
 
-            return Ok(this.mapper.Map<IEnumerable<ATControllerReadDTO>>(controllerItems));
+            return Ok(_mapper.Map<IEnumerable<ATControllerReadDTO>>(controllerItems));
 
         }
 
@@ -93,9 +93,9 @@ namespace bahrain_api.Controllers
         public ActionResult<IEnumerable<ATControllerReadDTO>> GetControllerBySoloVal()
         {
 
-            var controllerItems = this.repository.GetSignedOffControllers();
+            var controllerItems = _repository.GetSignedOffControllers();
 
-            return Ok(this.mapper.Map<IEnumerable<ATControllerReadDTO>>(controllerItems));
+            return Ok(_mapper.Map<IEnumerable<ATControllerReadDTO>>(controllerItems));
 
         }
 
@@ -103,9 +103,9 @@ namespace bahrain_api.Controllers
         public ActionResult<IEnumerable<ATControllerReadDTO>> GetControllerBySignOff()
         {
 
-            var controllerItems = this.repository.GetSignedOffControllers();
+            var controllerItems = _repository.GetSignedOffControllers();
 
-            return Ok(this.mapper.Map<IEnumerable<ATControllerReadDTO>>(controllerItems));
+            return Ok(_mapper.Map<IEnumerable<ATControllerReadDTO>>(controllerItems));
 
         }
 
@@ -120,15 +120,15 @@ namespace bahrain_api.Controllers
 
         //POST api.bahrainvacc.com/controllers
         [HttpPost]
-        public ActionResult <ATControllerReadDTO> AddATController(ATControllerCreateDTO controllerCreateDTO)
+        public ActionResult <ATControllerReadDTO> AddATController(ATControllerCreateDTO controllerCreateDto)
         {
-            var controllerModel = this.mapper.Map<ATController>(controllerCreateDTO);
-            this.repository.AddATController(controllerModel);
-            this.repository.SaveChanges();
+            var controllerModel = _mapper.Map<ATController>(controllerCreateDto);
+            _repository.AddATController(controllerModel);
+            _repository.SaveChanges();
 
-            var controllerReadDTO = this.mapper.Map<ATControllerReadDTO>(controllerModel);
+            var controllerReadDto = _mapper.Map<ATControllerReadDTO>(controllerModel);
 
-            return CreatedAtRoute(nameof(GetControllerByID), new {ID = controllerReadDTO.id}, controllerReadDTO);
+            return CreatedAtRoute(nameof(GetControllerById), new {ID = controllerReadDto.Id}, controllerReadDto);
         }
 
         /////////////
@@ -141,17 +141,17 @@ namespace bahrain_api.Controllers
 
         //PUT api.bahrainvacc.com/controllers/id/{id}
         [HttpPut("id/{id}")]
-        public ActionResult UpdateATController(int ID, ATControllerUpdateDTO controllerUpdateDTO)
+        public ActionResult UpdateATController(int id, ATControllerUpdateDTO controllerUpdateDto)
         {
-            var controllerFromRepo = this.repository.GetControllerByID(ID);
+            var controllerFromRepo = _repository.GetControllerById(id);
             if (controllerFromRepo == null)
             {
                 return NotFound();
             }
 
-            this.mapper.Map(controllerUpdateDTO, controllerFromRepo);
-            this.repository.UpdateATController(controllerFromRepo);
-            this.repository.SaveChanges();
+            _mapper.Map(controllerUpdateDto, controllerFromRepo);
+            _repository.UpdateATController(controllerFromRepo);
+            _repository.SaveChanges();
 
             return NoContent();
 
@@ -177,16 +177,16 @@ namespace bahrain_api.Controllers
 
         //PATCH api.bahrainvacc.com/controllers/id/{id}
         [HttpPatch("id/{id}")]
-        public ActionResult PatchATController(int ID, JsonPatchDocument<ATControllerUpdateDTO> patchDoc)
+        public ActionResult PatchATController(int id, JsonPatchDocument<ATControllerUpdateDTO> patchDoc)
         {
 
-            var controllerFromRepo = this.repository.GetControllerByID(ID);
+            var controllerFromRepo = _repository.GetControllerById(id);
             if (controllerFromRepo == null) 
             {
                 return NotFound();
             }
 
-            var controllerToPatch = this.mapper.Map<ATControllerUpdateDTO>(controllerFromRepo);
+            var controllerToPatch = _mapper.Map<ATControllerUpdateDTO>(controllerFromRepo);
             patchDoc.ApplyTo(controllerToPatch, ModelState); //Modelstate checking if model validations are valid, nice
 
             if (!TryValidateModel(controllerToPatch))
@@ -194,10 +194,10 @@ namespace bahrain_api.Controllers
                 return ValidationProblem(ModelState);
             }
 
-            this.mapper.Map(controllerToPatch, controllerFromRepo);
-            this.repository.UpdateATController(controllerFromRepo); //I think these two lines do the same thing?
+            _mapper.Map(controllerToPatch, controllerFromRepo);
+            _repository.UpdateATController(controllerFromRepo); //I think these two lines do the same thing?
 
-            this.repository.SaveChanges();
+            _repository.SaveChanges();
 
             return NoContent();
 
@@ -215,21 +215,21 @@ namespace bahrain_api.Controllers
 
         //DELETE api.bahrainvacc.com/controllers/id/{id}
         [HttpDelete("id/{id}")]
-        public ActionResult DeleteATController(int ID)
+        public ActionResult DeleteATController(int id)
         {
-            var controllerFromRepo = this.repository.GetControllerByID(ID);
+            var controllerFromRepo = _repository.GetControllerById(id);
             if (controllerFromRepo == null) 
             {
                 return NotFound();
             }
 
-            this.repository.DeleteController(controllerFromRepo);
-            this.repository.SaveChanges();
+            _repository.DeleteController(controllerFromRepo);
+            _repository.SaveChanges();
 
             //return NoContent();
             //We are going to return the deleted record just in case it was an accident, the user can copy it and put it back.
             //or in the system, we can add an undo button while the delete successful page is still active - it can keep the response until the user leaves the page.
-            return Ok(this.mapper.Map<ATControllerReadDTO>(controllerFromRepo));
+            return Ok(_mapper.Map<ATControllerReadDTO>(controllerFromRepo));
 
         }
 

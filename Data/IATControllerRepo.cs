@@ -11,13 +11,13 @@ namespace bahrain_api.Data
         bool SaveChanges();
         
         IEnumerable<ATController> GetAllControllers();
-        ATController GetControllerByID(int ID);
+        ATController GetControllerById(int id);
         IEnumerable<ATController> GetControllerByRating(string rating);
         IEnumerable<ATController> GetSignedOffControllers();
         IEnumerable<ATController> GetSoloValidatedControllers();
-        ATController GetControllerByNetworkID(string networkID);
-        ATController GetControllerStatus(int networkID);
-        ATController GetHomeDivision(int networkID);
+        ATController GetControllerByNetworkId(string networkID);
+        ATController GetControllerStatus(int networkId);
+        ATController GetHomeDivision(int networkId);
         //ATController GetControllersByPosition(string positions);
         void AddATController(ATController atc);
         void UpdateATController(ATController atc);

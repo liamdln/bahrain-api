@@ -20,20 +20,20 @@ namespace bahrain_api.Data
         {
             var controllers = new List<ATController>
             {
-                new ATController{id=0, fullName="Piam Lee", rating="I1", email="user1@email.com"},
-                new ATController{id=1, fullName="Vavin", rating="C3", email="user2@email.com"},
-                new ATController{id=2, fullName="Kornie", rating="I3", email="user3@email.com"}
+                new ATController{Id=0, FullName="Piam Lee", Rating="I1", Email="user1@email.com"},
+                new ATController{Id=1, FullName="Vavin", Rating="C3", Email="user2@email.com"},
+                new ATController{Id=2, FullName="Kornie", Rating="I3", Email="user3@email.com"}
             };
 
             return controllers;
         }
 
-        public ATController GetControllerByID(int ID)
+        public ATController GetControllerById(int id)
         {
-            return new ATController{id=0, fullName="Piam Lee", rating="I1", email="user1@email.com"};
+            return new ATController{Id=0, FullName="Piam Lee", Rating="I1", Email="user1@email.com"};
         }
 
-        public ATController GetControllerByNetworkID(string networkID)
+        public ATController GetControllerByNetworkId(string networkId)
         {
             throw new System.NotImplementedException();
         }
@@ -48,12 +48,12 @@ namespace bahrain_api.Data
             throw new System.NotImplementedException();
         }
 
-        public ATController GetControllerStatus(int networkID)
+        public ATController GetControllerStatus(int networkId)
         {
             throw new System.NotImplementedException();
         }
 
-        public ATController GetHomeDivision(int networkID)
+        public ATController GetHomeDivision(int networkId)
         {
             throw new System.NotImplementedException();
         }

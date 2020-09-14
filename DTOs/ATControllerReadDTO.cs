@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
 namespace bahrain_api.DTOs
 {
     public class ATControllerReadDTO
@@ -9,29 +6,29 @@ namespace bahrain_api.DTOs
         //Ignore model validation - for up to date validations see the models in the "Models" file.
 
         //[Key]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         //[Required(ErrorMessage="Controller name is required.")]
-        public string fullName { get; set; }
+        public string FullName { get; set; }
 
         //[Required(ErrorMessage="Rating is required.")]
         //[MaxLength(2, ErrorMessage="Rating can only be 2 characters. For example, S1 or C3.")]
-        public string rating { get; set; }
+        public string Rating { get; set; }
 
         //[Required(ErrorMessage="VATSIM ID is required.")]
-        public string networkID { get; set; }
+        public string NetworkId { get; set; }
 
         //[Required(ErrorMessage="Sign off state is required.")]
-        public bool hasSignOff { get; set; }
+        public bool HasSignOff { get; set; }
 
         //[Required(ErrorMessage="Solo endorsement state is required.")]
-        public bool onSolo { get; set; }
+        public bool OnSolo { get; set; }
 
         //[Required]
-        public bool visitor { get; set; }
+        public bool Visitor { get; set; }
 
         //[Required(ErrorMessage="Approved positions required.")]
-        public string approvedPositions { get; set; }
+        public string ApprovedPositions { get; set; }
 
 
 
