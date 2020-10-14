@@ -2,6 +2,10 @@
 Written using ASP.NET.
 The Bahrain vACC is a **virtual** air traffic control centre on the VATSIM network.
 
+## Moved
+
+This project has been moved to: https://github.com/accbh/api-cs
+
 ## Running
 ### Database
 Before running you need to set up a database. You can use either MySQL or MariaDB, for this project I used MariaDB. Once you have setup your database, create a user and append the details to the connection string inside `appsettings.json`.
